@@ -8,6 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.web.server.ResponseStatusException;
+
+
 import java.net.URI;
 import java.util.List;
 
@@ -32,9 +35,24 @@ public class ProductController {
 
   
     @GetMapping("/{id}")
-    public Product buscarPorId(@PathVariable Long id) {
-        return repository.findById(id).orElseThrow();   
+    public Product searchId(@PathVariable Long id) {
+        return repository.findById(id)
+        .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não encontrado"));   
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Product> atualizar(@PathVariable Long id,
+                                         @RequestBody @Valid Product dto) {
+    Product saved = repository.findById(id)
+                              .map(p -> {
+                                  p.setNome(dto.getNome());
+                                  p.setCategoria(dto.getCategoria());
+                                  p.setPreco(dto.getPreco());
+                                  return repository.save(p);
+                              }).orElseThrow();
+    return ResponseEntity.ok(saved);
+}
+
 
    
     @DeleteMapping("/{id}")
