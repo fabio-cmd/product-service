@@ -44,7 +44,7 @@ public class OrderIntegrationController : ControllerBase
 
         var order = new OrderDTO
         {
-            Id = Guid.NewGuid().GetHashCode(), 
+            Id = Guid.NewGuid().GetHashCode(),
             ProductNames = products.Select(p => p.Nome).Where(nome => nome != null).Cast<string>().ToList()
         };
 
@@ -52,18 +52,18 @@ public class OrderIntegrationController : ControllerBase
     }
 
     public class Product
-{
-    public string? Nome { get; set; }
-    public string? Categoria { get; set; }
-    public decimal Preco { get; set; }
-}
+    {
+        public string? Nome { get; set; }
+        public string? Categoria { get; set; }
+        public decimal Preco { get; set; }
+    }
 
 
-public class OrderDTO
-{
-    public int Id { get; set; }
-    public List<string> ProductNames { get; set; } = new List<string>();
-}
+    public class OrderDTO
+    {
+        public int Id { get; set; }
+        public List<string> ProductNames { get; set; } = new List<string>();
+    }
 
 }
 
