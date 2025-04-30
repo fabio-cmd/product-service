@@ -1,0 +1,26 @@
+replicaCount: 3
+
+image:
+  repository: fabiodinizdev/product-service
+  tag: latest
+  pullPolicy: Always
+
+service:
+  type: LoadBalancer
+  port: 8080
+
+resources:
+  limits:
+    cpu: "1000m"
+    memory: "1Gi"
+  requests:
+    cpu: "500m"
+    memory: "512Mi"
+
+livenessProbe:
+  path: /actuator/health
+  port: 8080
+
+readinessProbe:
+  path: /actuator/health
+  port: 8080

@@ -1,0 +1,17 @@
+replicaCount: 1
+
+image:
+  repository: gvenzl/oracle-free
+  tag: "23-slim"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 1521
+
+storage:
+  size: 5Gi
+  accessMode: ReadWriteOnce
+
+oracle:
+  password: oracle
