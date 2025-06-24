@@ -37,4 +37,4 @@ bin/
 obj/
 
 #Arquivo de ambiente
-.env
+.env*
