@@ -35,3 +35,6 @@ build/
 # Pastas temporárias do .NET
 bin/
 obj/
+
+#Arquivo de ambiente
+.env
